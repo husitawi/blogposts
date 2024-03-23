@@ -18,6 +18,36 @@ I got married! 🎊🎉
 
 ## A few things I published in 2023 
 
+```ts 
+/* example path: /api/tables/[table] */
+
+export async function GET(
+    request: NextRequest,
+    { params }: { params: { table: string } }
+) {
+    // check for authorized user first! 
+    try {
+        const { table } = params
+        if (!table) throw new Error('Table name required')
+
+        // check table name with list of table names here
+
+        // if table doesn't exist, throw an error 
+
+        // Query: SELECT * FROM table and get a JSON response 
+
+    } catch (e) {
+        if (e instanceof Error) {
+            return new Response(e.message, {
+                status: 400,
+            })
+        }
+    }
+    
+
+}
+```
+
 ### 4 Full Courses:
 
 - [TypeScript Full Course](https://youtu.be/gieEQFIfgYc) (January)
