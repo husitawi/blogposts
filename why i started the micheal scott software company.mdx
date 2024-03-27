@@ -1,13 +1,11 @@
 ---
-title: 'Next.js: favicon, SVG icon, Apple & Chrome icons'
-summary: "Adding a favicon should be easy, right? Let's dive into adding favicons in Next.js."
+title: 'Why I started the Michael Scott Software Company LTD'
+summary: "What this means for myself and my future projects."
 date: '2023-11-13'
 modified: '2023-11-22'
-tags: ['nextjs','blog','webdev']
+tags: ['diary','work']
 thumbnail: true
 ---
-
-<Video id="6ih_3m_UPKg" />
 
 I began discussing [Next.js Metadata](https://www.davegray.codes/posts/nextjs-ordering-merging-metadata) in my last blog post, and I set up some basic information for my blog. That said, there are still a few areas to take a deeper dive on and the first is how to handle **favicon** and **icon** requirements.
 
@@ -76,64 +74,3 @@ The [Next.js manifest docs](https://nextjs.org/docs/app/api-reference/file-conve
 I opted to generate my manifest with the function provided in the Next.js docs. 
 
 Here is what my `manifest.ts` file contains:
-
-```ts 
-import { MetadataRoute } from 'next'
-
-export default function manifest(): MetadataRoute.Manifest {
-    return {
-        name: 'Dave Gray Teaches Code',
-        short_name: "Dave Gray",
-        description: "Dave's Blog powered by Next.js",
-        start_url: '/',
-        display: 'standalone',
-        background_color: '#1E283A',
-        theme_color: '#1E283A',
-        icons: [
-            {
-                "src": "/images/icon-192.png",
-                "sizes": "192x192",
-                "type": "image/png"
-            },
-            {
-                "src": "/images/icon-512.png",
-                "sizes": "512x512",
-                "type": "image/png"
-            },
-        ],
-    }
-}
-```
-If you are curious about the settings above, you can read the [Web Manifest specs](https://developer.mozilla.org/en-US/docs/Web/Manifest). If you leave some of these out, [Lighthouse](https://developer.chrome.com/en/docs/lighthouse/) may complain when evaluating your site.
-
-**Note:** You only need to provide info for the two `android-chrome` icons in this file as I did above. 
-
-## Step Five: Where to Put Your Files 
-
-You should now have the following files in root of your app directory: 
-
-1. favicon.ico 
-2. icon.svg 
-3. manifest.ts 
-
-_And you should have the `android-chrome` icons in your `public` folder._ 
-
-I'm using an `images` folder inside my public folder, so notice my manifest file has `/images/icon-192.png`. You do not have to specify your `public` folder as part of the file path in the manifest.
-
-## Step Six: Build Your App 
-
-Open a terminal window and type `npm run dev`. 
-
-Open up your Next.js app in your browser and inspect the `<head>` element.
-
-_You should now see the following links:_
-
-```html 
-<link rel="manifest" href="/manifest.webmanifest">
-<link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="48x48">
-<link rel="icon" href="/icon.svg?f4ac04897a3b2294" type="image/svg+xml" sizes="any">
-<link rel="apple-touch-icon" href="/apple-icon.png?ebbb82dc3cc1b5eb" type="image/png" sizes="180x180">
-```
-**Note:** The manifest link may not be next to the icon links, but it should be in there somewhere. 
-
-With [Kudamatsu](https://dev.to/masakudamatsu/favicon-nightmare-how-to-maintain-sanity-3al7) updating his article to recommend the `sizes="48x48"` setting for the `favicon.ico` in August, _I'm glad to see that is already reflected in how Next.js handles that file!_ 
